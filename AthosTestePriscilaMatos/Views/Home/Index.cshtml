@@ -1,0 +1,164 @@
+﻿@section scripts {
+    @Scripts.Render("~/bundles/app")
+}
+
+<div class="page-header">
+    <h1>Condomínios</h1>
+    <h6>Cadastro e Listagem de Condomínios</h6>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">+ Condomínio</h2>
+            </div>
+
+            <div class="panel-body">
+                <form class="form-horizontal" data-bind="submit: addCondominio">
+                    <div class="form-group">
+                        <label for="inputAdministradora" class="col-sm-2 control-label">Administradora</label>
+                        <div class="col-sm-12">
+                            <select data-bind="options:administradoras, optionsText: 'Nome', value:newCondominio.Administradora"></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group" data-bind="with: newCondominio">
+                        <label for="inputNome_Condominio" class="col-sm-2 control-label">NomeCondomínio</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="inputNome_Condominio" data-bind="value:Nome_Condominio" />
+                        </div>
+                        <label for="inputTp_Usuario" class="col-sm-2 control-label">TipoUsuário</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="inputTp_Usuario" data-bind="value:Tp_Usuario" />
+                        </div>
+
+                    </div>
+                    <button type="submit" name="condominio" class="btn btn-default">Salvar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">Condomínios Cadastrados</h2>
+            </div>
+            <div class="panel-body">
+                <ul class="list-unstyled" data-bind="foreach: condominios">
+                    <li>
+                        <strong><span data-bind="text: Nome_Condominio"></span></strong>
+                        <small><a href="#" data-bind="click: $parent.getCondominioDetail">Detalhes</a></small>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="alert alert-danger" data-bind="visible: error"><p data-bind="text: error"></p></div>
+    </div>
+    <!-- ko if:detail() -->
+    <div class="col-md-4">
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">Detalhes</h2>
+            </div>
+            <table class="table">
+                <tr><td>Administradora</td><td data-bind="text: detail().Administradora"></td></tr>
+                <tr><td>Tipo Usuário</td><td data-bind="text: detail().Tp_Usuario"></td></tr>
+
+            </table>
+        </div>
+
+    </div>
+    <!-- /ko -->
+
+
+
+</div>
+
+
+<div class="page-header">
+    <h1>Usuários</h1>
+    <h6>Cadastro e Listagem de Usuários</h6>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">+ Usuário</h2>
+            </div>
+
+            <div class="panel-body">
+                <form class="form-horizontal" data-bind="submit1: addUsuario">
+
+                    <div class="form-group" data-bind="with: newUsuario">
+                        <label for="inputNome" class="col-sm-2 control-label">Nome</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="inputNome" data-bind="value:Nome" />
+                        </div>
+                        <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="inputEmail" data-bind="value:Email" />
+                        </div>
+                        <label for="inputCondominio" class="col-sm-2 control-label">Condominio</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="inputCondominio" data-bind="value:Condominio" />
+                        </div>
+                        <label for="inputTp_Usuario" class="col-sm-2 control-label">TipoUsuário</label>
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="inputTp_Usuario" data-bind="value:Tp_Usuario" />
+                        </div>
+
+                    </div>
+                    <button type="submit" name="usuarios" class="btn btn-default">Salvar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">Usuarios Cadastrados</h2>
+            </div>
+            <div class="panel-body">
+                <ul class="list-unstyled" data-bind="foreach: usuarios">
+                    <li>
+
+                        <strong><span data-bind="text: Nome"></span></strong>
+                        <small><a href="#" data-bind="click: $parent.getUsuarioDetail">Detalhes</a></small>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="alert alert-danger" data-bind="visible: error"><p data-bind="text: error"></p></div>
+    </div>
+    <!-- ko if:detailUsuario() -->
+    <div class="col-md-4">
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">Detalhes</h2>
+            </div>
+            <table class="table">
+                <tr><td>Email</td><td data-bind="text: detailUsuario().Email"></td></tr>
+                <tr><td>Tipo Usuário</td><td data-bind="text: detailUsuario().Tp_Usuario"></td></tr>
+                <tr><td>Condominio</td><td data-bind="text: detailUsuario().Condominio"></td></tr>
+            </table>
+        </div>
+
+    </div>
+    <!-- /ko -->
+</div>
+
+
+
+
